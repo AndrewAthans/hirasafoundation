@@ -1,0 +1,135 @@
+// Mobile menu toggle and dropdown interactions
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Dropdown elements
+    const studentBtn = document.getElementById('student-leaders-btn');
+    const studentDropdown = document.getElementById('student-leaders-dropdown');
+    const politicalBtn = document.getElementById('political-leaders-btn');
+    const politicalDropdown = document.getElementById('political-leaders-dropdown');
+    const movementBtn = document.getElementById('movement-leaders-btn');
+    const movementDropdown = document.getElementById('movement-leaders-dropdown');
+
+    // Function to close all dropdowns
+    function closeAllDropdowns() {
+        if (studentDropdown) {
+            studentDropdown.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+            studentDropdown.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+        }
+        if (politicalDropdown) {
+            politicalDropdown.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+            politicalDropdown.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+        }
+        if (movementDropdown) {
+            movementDropdown.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+            movementDropdown.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+        }
+    }
+
+    // Function to toggle dropdown
+    function toggleDropdown(button, dropdown) {
+        const isOpen = dropdown && !dropdown.classList.contains('invisible');
+        
+        // Close all first
+        closeAllDropdowns();
+        
+        // If it wasn't open, open it
+        if (!isOpen && dropdown) {
+            dropdown.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+            dropdown.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+        }
+    }
+
+    // Student Leaders dropdown
+    if (studentBtn && studentDropdown) {
+        studentBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown(studentBtn, studentDropdown);
+        });
+    }
+
+    // Political Leaders dropdown
+    if (politicalBtn && politicalDropdown) {
+        politicalBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown(politicalBtn, politicalDropdown);
+        });
+    }
+
+    // Movement Leaders dropdown
+    if (movementBtn && movementDropdown) {
+        movementBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown(movementBtn, movementDropdown);
+        });
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideDropdown = 
+            (studentDropdown && studentDropdown.contains(event.target)) ||
+            (politicalDropdown && politicalDropdown.contains(event.target)) ||
+            (movementDropdown && movementDropdown.contains(event.target));
+        
+        const isClickOnButton = 
+            (studentBtn && studentBtn.contains(event.target)) ||
+            (politicalBtn && politicalBtn.contains(event.target)) ||
+            (movementBtn && movementBtn.contains(event.target));
+
+        if (!isClickInsideDropdown && !isClickOnButton) {
+            closeAllDropdowns();
+        }
+
+        // Mobile menu close logic
+        if (mobileMenu && mobileMenuBtn) {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnMobileButton = mobileMenuBtn.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnMobileButton && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('svg');
+                if (icon) {
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                }
+            }
+        }
+    });
+
+    // Mobile menu toggle
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            
+            // Toggle hamburger icon
+            const icon = mobileMenuBtn.querySelector('svg');
+            if (icon) {
+                if (mobileMenu.classList.contains('hidden')) {
+                    // Show hamburger
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                } else {
+                    // Show X
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                }
+            }
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+});
+
