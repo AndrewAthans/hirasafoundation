@@ -2,6 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const searchBtn = document.getElementById('search-btn');
+    const searchOverlay = document.getElementById('search-overlay');
+    const searchInput = document.getElementById('search-input');
 
     // Dropdown elements
     const studentBtn = document.getElementById('student-leaders-btn');
@@ -140,5 +143,40 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Search button toggle
+    if (searchBtn && searchOverlay) {
+        searchBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            searchOverlay.classList.toggle('hidden');
+            if (!searchOverlay.classList.contains('hidden') && searchInput) {
+                // Focus input when search opens
+                setTimeout(() => searchInput.focus(), 100);
+            }
+        });
+    }
+
+    // Close search overlay when clicking outside
+    if (searchOverlay) {
+        searchOverlay.addEventListener('click', function(e) {
+            if (e.target === searchOverlay) {
+                searchOverlay.classList.add('hidden');
+            }
+        });
+    }
+
+    // Close search overlay on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && searchOverlay && !searchOverlay.classList.contains('hidden')) {
+            searchOverlay.classList.add('hidden');
+        }
+    });
+
+    // Prevent search input clicks from closing overlay
+    if (searchInput) {
+        searchInput.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
 });
 
