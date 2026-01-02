@@ -9,7 +9,7 @@
 <body class="bg-white text-gray-900">
     <!-- Header/Navigation -->
     <header class="bg-gray-800 sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-4">
+        <nav class="container mx-auto px-4 py-4 relative">
             <div class="flex items-center justify-between">
                 <!-- Logo Section - Left Side -->
                 <div class="flex items-center space-x-3">
@@ -32,29 +32,16 @@
                     </div>
                 </div>
 
-                <!-- Desktop Navigation - Right Side -->
-                <div class="hidden lg:flex items-center gap-3">
-                    <a href="#home" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Home</a>
-                    <a href="#approach" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Our Approach</a>
-                    <a href="#framework" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Leadership Framework</a>
-                    <a href="#programs" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Programs</a>
-                    <a href="#pilot" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Pilot Program</a>
-                    <a href="#impact" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Impact</a>
-                    <a href="#support" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Support</a>
-                    <a href="#about" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">About</a>
-                    <a href="#contact" class="border border-white rounded-lg px-4 py-2 text-white uppercase text-sm font-medium hover:bg-white hover:text-gray-800 transition whitespace-nowrap">Contact</a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="lg:hidden border border-white rounded-lg p-2 text-white">
+                <!-- Hamburger Menu Button - All Screen Sizes -->
+                <button id="mobile-menu-btn" class="border border-white rounded-lg p-2 text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 space-y-2">
+            <!-- Dropdown Menu - All Screen Sizes -->
+            <div id="mobile-menu" class="hidden mt-4 pb-4 space-y-2 lg:absolute lg:right-4 lg:top-full lg:bg-gray-800 lg:border lg:border-white lg:rounded-lg lg:shadow-lg lg:min-w-[200px] lg:z-50">
                 <a href="#home" class="block py-2 px-3 text-white hover:bg-gray-700 rounded">Home</a>
                 <a href="#approach" class="block py-2 px-3 text-white hover:bg-gray-700 rounded">Our Approach</a>
                 <a href="#framework" class="block py-2 px-3 text-white hover:bg-gray-700 rounded">Leadership Framework</a>
