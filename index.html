@@ -13,23 +13,29 @@
             <div class="flex items-center justify-between">
                 <!-- Logo Section - Left Side -->
                 <div class="flex items-center space-x-3">
-                    <!-- Logo Icon - Blended with header background -->
-                    <div class="flex-shrink-0 bg-transparent">
+                    <!-- Logo Icon - Integrated white outline style -->
+                    <div class="flex-shrink-0 border border-white rounded p-1.5 flex items-center justify-center" style="width: 48px; height: 48px;">
                         <img src="./assets/hirasa-logo.png" 
                              alt="Hirasa Foundation Logo" 
-                             class="h-12 w-12 object-contain"
-                             style="mix-blend-mode: screen; background-color: transparent; filter: brightness(1.05);"
+                             class="w-full h-full object-contain"
+                             style="filter: brightness(0) invert(1); background-color: transparent;"
                              onerror="this.style.display='none';">
                     </div>
-                    <!-- Organization Name and Tagline -->
+                    <!-- Organization Name and Tagline - Stacked vertically -->
                     <div class="flex flex-col">
-                        <div class="text-white font-serif text-xl font-bold leading-tight">HIRASA FOUNDATION</div>
-                        <div class="text-white text-xs font-sans leading-tight opacity-90">Where Conservative Leaders are Made</div>
+                        <div class="text-white font-serif text-lg font-bold leading-tight">HIRASA</div>
+                        <div class="text-white font-serif text-base font-semibold leading-tight">FOUNDATION</div>
+                        <div class="text-white text-xs font-sans leading-tight opacity-90 mt-0.5">cultivating the next generation of muslims</div>
                     </div>
                 </div>
 
+                <!-- Blank Space for Navigation Buttons (matching Leadership Institute spacing) -->
+                <div class="flex-1 flex items-center justify-center" style="min-width: 600px;">
+                    <!-- Empty space to match 3 navigation buttons width -->
+                </div>
+
                 <!-- Search and Menu Buttons - Right Side -->
-                <div class="flex items-center gap-2 mr-4">
+                <div class="flex items-center gap-3 mr-4">
                     <!-- Search Button -->
                     <button id="search-btn" class="border border-white rounded-lg p-2 text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
