@@ -178,5 +178,72 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
         });
     }
+
+    // Video Slideshow Logic
+    const blackGuysVideo = document.getElementById('black-guys-video');
+    const talkingGuyVideo = document.getElementById('talking-guy-video');
+    
+    if (blackGuysVideo && talkingGuyVideo) {
+        let isPlayingBlackGuys = true;
+        let blackGuysDuration = 0;
+        let blackGuysHalfDuration = 0;
+        
+        // Get video duration when metadata loads
+        blackGuysVideo.addEventListener('loadedmetadata', function() {
+            blackGuysDuration = blackGuysVideo.duration;
+            blackGuysHalfDuration = blackGuysDuration / 2;
+            // Start with black guys video
+            blackGuysVideo.play();
+        });
+        
+        talkingGuyVideo.addEventListener('loadedmetadata', function() {
+            // Set talking guy video to 5 seconds max
+            talkingGuyVideo.addEventListener('timeupdate', function() {
+                if (this.currentTime >= 5) {
+                    this.pause();
+                    this.currentTime = 0;
+                }
+            });
+        });
+        
+        // Switch to talking guy video after half duration of black guys video
+        blackGuysVideo.addEventListener('timeupdate', function() {
+            if (this.currentTime >= blackGuysHalfDuration && isPlayingBlackGuys) {
+                isPlayingBlackGuys = false;
+                // Fade out black guys, fade in talking guy
+                blackGuysVideo.classList.remove('opacity-100');
+                blackGuysVideo.classList.add('opacity-0');
+                talkingGuyVideo.classList.remove('opacity-0');
+                talkingGuyVideo.classList.add('opacity-100');
+                talkingGuyVideo.currentTime = 0;
+                talkingGuyVideo.play();
+            }
+        });
+        
+        // Switch back to black guys video after 5 seconds of talking guy
+        talkingGuyVideo.addEventListener('timeupdate', function() {
+            if (this.currentTime >= 5 && !isPlayingBlackGuys) {
+                isPlayingBlackGuys = true;
+                // Fade out talking guy, fade in black guys
+                talkingGuyVideo.classList.remove('opacity-100');
+                talkingGuyVideo.classList.add('opacity-0');
+                blackGuysVideo.classList.remove('opacity-0');
+                blackGuysVideo.classList.add('opacity-100');
+                blackGuysVideo.currentTime = 0;
+                blackGuysVideo.play();
+            }
+        });
+        
+        // Handle video end events
+        talkingGuyVideo.addEventListener('ended', function() {
+            isPlayingBlackGuys = true;
+            talkingGuyVideo.classList.remove('opacity-100');
+            talkingGuyVideo.classList.add('opacity-0');
+            blackGuysVideo.classList.remove('opacity-0');
+            blackGuysVideo.classList.add('opacity-100');
+            blackGuysVideo.currentTime = 0;
+            blackGuysVideo.play();
+        });
+    }
 });
 
